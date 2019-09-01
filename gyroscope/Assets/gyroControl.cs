@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class gyroControl : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class gyroControl : MonoBehaviour
     spawnBlood sB;
     public GameObject particles;
     public scoreStuff score;
+    public GameObject explosion;
     
     
 	// Use this for initialization
@@ -49,7 +50,7 @@ public class gyroControl : MonoBehaviour
     {
         if(other.gameObject.tag == "thing"){
             if(other.contacts[0].otherCollider == col){
-                SceneManager.LoadScene("game");
+                endGame.instance.end();
             }
             else{
                 // sB.splash(other.transform.position,0.5f,null,2);
@@ -67,7 +68,8 @@ public class gyroControl : MonoBehaviour
                 Destroy(other.gameObject);
             }
             else{
-                SceneManager.LoadScene("game");
+                gEnabled = false;
+                GameObject.Instantiate(explosion,other.transform.position,Quaternion.identity);
             }
             
         }
