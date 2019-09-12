@@ -14,10 +14,14 @@ public class powerUp : MonoBehaviour
     public IPowerUp[] powerUps;
     public group[] groups;
     public float defaultPowerUpTime;
-    void Start()
+    public float startTime = 10f;
+    public void start()
     {
         times = new float[powerUps.Length];
         bools = new bool[powerUps.Length];
+    }
+    public void activateStartPowerUp(int index){
+        activate(index,startTime);
     }
     public void activate(int index, float time){
         times[index]+= time;
@@ -48,7 +52,7 @@ public class powerUp : MonoBehaviour
                     }
                     powerUps[i].activate();   
                 }
-                times[i]-= Time.unscaledDeltaTime;
+                times[i]-= Time.deltaTime;
                 if(times[i]<0){
                     deactivate(i);
                 }

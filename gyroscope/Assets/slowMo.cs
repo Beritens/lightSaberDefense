@@ -12,7 +12,6 @@ public class slowMo : IPowerUp
     public override void activate(){
         anim.SetBool("slowMo",true);
         this.enabled = true;
-        pU.times[2] += 3;
         active = true;
         StartCoroutine(changeTime(Time.timeScale,slowDown,0.05f));
     }

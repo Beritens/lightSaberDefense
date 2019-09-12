@@ -35,6 +35,8 @@ public class spawn : MonoBehaviour
     }
     IEnumerator spawnPU(){
         yield return new WaitForSeconds(powerUpBeforeTime);
+        if(!this.enabled)
+            yield return null;
         Vector2 dir = Random.insideUnitCircle;
         Vector2 pos = dir.normalized*distance;
         GameObject p = GameObject.Instantiate(powerUpPrefab,pos,Quaternion.identity);

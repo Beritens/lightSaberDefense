@@ -10,16 +10,17 @@ public class gyroControl : MonoBehaviour
 	Gyroscope gyroscope;
     Rigidbody2D rb;
     Collider2D col;
-    spawnBlood sB;
+    //spawnBlood sB;
     public GameObject particles;
     public scoreStuff score;
     public GameObject explosion;
+    public AudioSource audioS;
+    public AudioClip clip;
     
     
 	// Use this for initialization
 	void Start () {
-        
-        sB = spawnBlood.instance;
+        //sB = spawnBlood.instance;
         col = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
 		gEnabled = enableG();
@@ -58,6 +59,7 @@ public class gyroControl : MonoBehaviour
                 score.scoreUp();
                 GameObject.Instantiate(particles,other.contacts[0].point,Quaternion.LookRotation(other.contacts[0].normal,-Vector3.forward));
                 Destroy(other.gameObject);
+                audioS.PlayOneShot(clip);
             }
         }
         if(other.gameObject.GetComponent<powerUpThing>() != null){
